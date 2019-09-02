@@ -1,0 +1,50 @@
+---
+title: "Introduction to rgeolocate"
+author: "Oliver Keyes"
+date: "2015-07-26"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{IP Geolocation with rgeolocate}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+`rgeolocate` is an R package for geolocating IP addresses. It contains bindings to a variety of web APIs for IP geolocation, as well as an interface to the proprietary [MaxMind GeoIP](http://maxmind.com/) databases (and a corresponding sample database).
+
+For the package to install properly, you'll first need [libmaxminddb](https://github.com/maxmind/libmaxminddb): the source code and installation instructions can be found [here](https://github.com/maxmind/libmaxminddb/blob/master/README.md).
+
+## MaxMind databases
+
+The biggest chunk of functionality is around the MaxMind proprietary databases, which you can read about [here](https://www.maxmind.com/en/geoip2-databases). `rgeolocate` has support for retrieving continent, country, region, netspeed,
+and timezone information from these databases, which (unfortunately!) must be paid for if you want to access them.
+
+MaxMind does openly release a more limited set of databases covering country and city data; these are also supported and can
+be obtained [here](http://dev.maxmind.com/geoip/geoip2/geolite2/). To minimise the effort for the individual user, the smaller,
+country-level database is included in `rgeolocate`. To demonstrate both how to use the database, and how to use the geolocation
+function, we can do:
+
+
+```r
+library(rgeolocate)
+file <- system.file("extdata","GeoLite2-Country.mmdb", package = "rgeolocate")
+results <- maxmind("196.200.60.51", file, c("continent_name", "country_code", "country_name"))
+results
+```
+
+```
+##   continent_name country_code country_name
+## 1         Africa           ML         Mali
+```
+
+The `maxmind()` function is fully vectorised and will happily geolocate around a million IP addresses in just under 5 seconds.
+
+## Web APIs
+
+`rgeolocate` also contains bindings to various IP geolocation web APIs; this chunk is still in development and is a wee bit
+unstable. At the moment, there is support for:
+
+* [db-ip.com](http://db-ip.com), through `db_ip()`;
+* [ip-api.com](http://ip-api.com), through `ip_api()`, and;
+* [telize.com](http://telize.com), through `telize()`
+
+These are all somewhat different, with different sources for their data and different *amounts* of data. While vectorised, they're going to be a lot slower than `maxmind()`, but are more viable for (say) obtaining information we don't currently extract from the MaxMind databases, or handling IP addresses the free MaxMind databases don't *cover* if you can't obtain the paid ones.

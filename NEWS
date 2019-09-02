@@ -1,6 +1,93 @@
-Version 0.2.0 [WIP]
+Version 1.1.0 [WIP]
 -------------------------------------------------------------------------
+* Allow for the retrieval of postcodes from city files (#44)
+* Maxmind calls should be slightly faster due to some pre-cacheing
+* Internal Maxmind dataset updated (#47)
+* Support for ipinfo.io (ip_info()) has been integrated. (#46)
+
+Version 1.0.1
+-------------------------------------------------------------------------
+* Functions registered with R's C API and namespacing system
+* ip2location() documentation clarified
+* R-side functions now automatically generate absolute paths to the database files.
+* Works on GCC 7.1
+
+Version 1.0.0
+-------------------------------------------------------------------------
+* Allow retrieving isp, organization, autonomous system number, and autonomous system organization from MaxMind (with an ISP database).
+* Support for ip2location binaries is provided through the ip2location() function.
+
+Version 0.8.0
+-------------------------------------------------------------------------
+
+DEVELOPMENT
+* Using longer delay for requests to ip-api.com due to new API rate limits.
+
+Version 0.7.0
+-------------------------------------------------------------------------
+
+NEW FEATURES
+* Added feature to retrieve city_geoname_id from maxmind databases
+* Unidenfitiable IP addresses will return NAs from maxmind()
+
+DEVELOPMENT
+* The vignette, and documentation of the maxmind function, have been improved to make explicit
+the datasets rgeolocate ships with (#25)
+* MaxMind free datasets updated.
+* Tests have been rebuilt to be tolerant of server-side problems in the case of remote API calls.
+
+Version 0.6.0
+-------------------------------------------------------------------------
+
+DEVELOPMENT
+* Internal country DB updated.
+* client_info() and other telize-based functionality deprecated, as they have shut down their public API.
+
+Version 0.5.0
+-------------------------------------------------------------------------
+
+NEW FEATURES
+* freegeoip() is deprecated as the service is too unreliable to be trusted.
+* David Robinson has provided code that allows for the retrieval of longitude and latitude from maxmind databases
+
+DEVELOPMENT
+* Changes to the build process should avoid issues on Fedora machines.
+
+Version 0.4.2
+-------------------------------------------------------------------------
+* Vignette naming problem corrected.
+
+Version 0.4.1
+-------------------------------------------------------------------------
+* Bug when asking maxmind for connection information now accidentally fixed;
+* Internal refactor by Drew Schmidt to maxmind-related C++.
+
+Version 0.4.0
+-------------------------------------------------------------------------
+
+NEW FEATURES
+*rgeolocate now works on Windows thanks to the work of Drew Schmidt.
+
+DEVELOPMENT
+*libmaxminddb is now included, making the code self-contained.
+*Unit tests are fixed to avoid unintended external dependencies.
+
+Version 0.3.0
+-------------------------------------------------------------------------
+NEW FEATURES
+* maxmind() is now variable - you can pass in single fields, or various permutations of fields, rather
+than having it geolocate everything all at once.
+
+
+Version 0.2.0
+-------------------------------------------------------------------------
+
+NEW FEATURES
 *Support for freegeoip.net
+*Support for telize.com
+
+DEVELOPMENT
+*add extern "C" to make the package more easily installable.
 
 Version 0.1.0
 -------------------------------------------------------------------------

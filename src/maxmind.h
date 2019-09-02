@@ -1,4 +1,6 @@
-#include <maxminddb.h>
+extern "C" {
+#include "maxminddb.h"
+}
 #include <Rcpp.h>
 #include <sstream>
 using namespace Rcpp;
@@ -10,27 +12,41 @@ class maxmind_bindings {
   
 private:
   
-  std::string mmdb_convert_string(MMDB_entry_data_s entry);
+  CharacterVector continent_name(MMDB_s *data, CharacterVector ip_addresses);
   
-  std::string continent_name(MMDB_lookup_result_s& results);
+  CharacterVector country_name(MMDB_s *data, CharacterVector ip_addresses);
   
-  std::string country_name(MMDB_lookup_result_s& results);
+  CharacterVector country_code(MMDB_s *data, CharacterVector ip_addresses);
   
-  std::string country_code(MMDB_lookup_result_s& results);
+  CharacterVector region_name(MMDB_s *data, CharacterVector ip_addresses);
   
-  std::string region_name(MMDB_lookup_result_s& results);
-  
-  std::string city_name(MMDB_lookup_result_s& results);
+  CharacterVector city_name(MMDB_s *data, CharacterVector ip_addresses);
 
-  std::string timezone(MMDB_lookup_result_s& results);
+  IntegerVector city_geoname_id(MMDB_s *data, CharacterVector ip_addresses);
+
+  CharacterVector postcode(MMDB_s *data, CharacterVector ip_addresses);
   
-  std::string connection(MMDB_lookup_result_s& results);
+  CharacterVector timezone(MMDB_s *data, CharacterVector ip_addresses);
   
-  std::vector < std::string > lookup(std::string& ip_address, MMDB_s *mmdb_set);
+  CharacterVector connection(MMDB_s *data, CharacterVector ip_addresses);
+
+  CharacterVector isp(MMDB_s *data, CharacterVector ip_addresses);
+  
+  CharacterVector organization(MMDB_s *data, CharacterVector ip_addresses);
+
+  IntegerVector asn(MMDB_s *data, CharacterVector ip_addresses);
+
+  CharacterVector aso(MMDB_s *data, CharacterVector ip_addresses);
+  
+  NumericVector latitude(MMDB_s *data, CharacterVector ip_addresses);
+
+  NumericVector longitude(MMDB_s *data, CharacterVector ip_addresses);
+  
+  List lookup(CharacterVector ip_addresses, MMDB_s *mmdb_set, std::vector < std::string > fields);
   
 public:
   
-  DataFrame call_maxmind(std::vector < std::string > ip_addresses, const char* file);
+  List call_maxmind(CharacterVector ip_addresses, const char* file, std::vector < std::string > fields);
 };
 
 #endif

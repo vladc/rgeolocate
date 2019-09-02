@@ -1,17 +1,24 @@
 Package: rgeolocate
 Type: Package
-Title: IP Geolocation in R
-Version: 0.1.0
-Date: 2015-05-17
-Author: Oliver Keyes
+Title: IP Address Geolocation
+Version: 1.1.90000
+Date: 2017-11-10
+Author: Oliver Keyes [aut, cre], Drew Schmidt [aut], David Robinson [ctb],
+    Chris Davis [ctb], Bob Rudis [ctb], Maxmind, Inc. [cph], Pascal Gloor [cph], IP2Location.com [cph]
 Maintainer: Oliver Keyes <ironholds@gmail.com>
-Description: This package aims to provide connectors to myriad online and offline sources for
- taking IP addresses and geolocating them to country, city, timezone and a whole other host of goodies.
- For individual connectors, see the package index. It depends on libmaxminddb, which can be obtained and
- installed from https://github.com/maxmind/libmaxminddb .
-License: MIT + file LICENSE
+Copyright: MaxMind, Inc. for the underlying libmaxmminddb library, IP2Location.com
+    for libip2location, and the package authors for all other content.
+Description: Connectors to online and offline sources for taking IP addresses
+    and geolocating them to country, city, timezone and other geographic ranges. For
+    individual connectors, see the package index.
+License: Apache License (== 2.0)
+BugReports: https://github.com/ironholds/rgeolocate/issues
 LinkingTo: Rcpp
-Imports: Rcpp,
-         httr
-Suggests: testthat
-SystemRequirements: libmaxminddb (see https://github.com/maxmind/libmaxminddb)
+Imports:
+    Rcpp,
+    httr
+Suggests:
+    testthat,
+    knitr
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1

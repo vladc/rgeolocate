@@ -1,3 +1,13 @@
 .Rproj.user
 .Rhistory
 .RData
+inst/doc
+
+src/config.h
+src/Makevars
+
+*.o
+*.log
+*.status
+
+*.DS_Store
